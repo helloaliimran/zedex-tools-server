@@ -110,21 +110,21 @@ def create_or_update_bill(bill_data: CreateUpdateBill):
 
     Args:
         items (list): A list of item dictionaries for the bill.
-        customer_id (str): The ID of the customer for the bill.
-        bill_id (str, optional): The ID of the bill to update. Defaults to None.
+        customerId (str): The ID of the customer for the bill.
+        billid (str, optional): The ID of the bill to update. Defaults to None.
         remarks (str, optional): Remarks for the bill. Defaults to None.
     """
     try:
-
-        result = _create_or_update_bill(
-            [item.model_dump() for item in bill_data.items],
-            bill_data.customer_id,
-            bill_data.bill_id,
-            bill_data.remarks,
-        )
-    except requests.exceptions.RequestException as e:
+        payload = {
+            "billId": bill_data.billId,
+            "customerId": bill_data.customerId,
+            "remarks": bill_data.remarks or "AI generated bill",
+            "items": [item.model_dump() for item in bill_data.items],
+        }
+        result = _create_or_update_bill(payload)
+    except Exception as e:
         raise ToolError(
-            "Zedex service is currently unreachable. Please try again shortly.") from e
+            f" {e} : Zedex service is currently unreachable. Please try again shortly.") from e
 
     if isinstance(result, dict) and result.get("error"):
         raise ToolError(

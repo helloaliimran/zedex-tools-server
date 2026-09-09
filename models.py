@@ -23,6 +23,6 @@ class CreateUpdateBill(BaseModel):
 
     """Data model for creating or updating a bill in the Zedex API."""
     items: list[BillItem]
-    customer_id: int
-    bill_id: int | None = None
+    customerId: int
+    billId: int | None = None
     remarks: str | None = None
