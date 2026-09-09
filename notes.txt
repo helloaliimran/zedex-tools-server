@@ -1,0 +1,6 @@
+to create new project  run this command:
+uv init mcp-tools-server --python 3.14
+
+Add MCP sdk:
+uv add "mcp[cli]"
+
