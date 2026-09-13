@@ -1,4 +1,4 @@
-from mcp_types import ToolAnnotations
+from mcp.types import ToolAnnotations
 import requests
 import json
 from mcp.server import MCPServer
@@ -51,7 +51,7 @@ mcp = MCPServer("Zedex tool calling", instructions=SYSTEM_MESSAGE)
 
 
 @mcp.tool(annotations=ToolAnnotations(
-    readonlyHint=True,
+    readOnlyHint=True,
     destructiveHint=False,
     idempotentHint=True,
 ))
@@ -78,7 +78,7 @@ def find_customer(search: str | None = None):
 
 
 @mcp.tool(annotations=ToolAnnotations(
-    readonlyHint=True,
+    readOnlyHint=True,
     destructiveHint=False,
     idempotentHint=True,
 ))
@@ -102,7 +102,7 @@ def get_lookups():
 
 
 @mcp.tool(annotations=ToolAnnotations(
-    readonlyHint=True,
+    readOnlyHint=True,
     destructiveHint=False,
     idempotentHint=True,
 ))
@@ -130,7 +130,7 @@ def search_product(products: list[ProductQuery]):
 
 
 @mcp.tool(annotations=ToolAnnotations(
-    readonlyHint=True,
+    readOnlyHint=True,
     destructiveHint=False,
     idempotentHint=True,
 ))
@@ -159,7 +159,7 @@ def get_bill(id_or_invoice_number: str):
 @mcp.tool(annotations=ToolAnnotations(
     destructiveHint=False,
     idempotentHint=False,
-    readonlyHint=False,
+    readOnlyHint=False,
 ))
 def create_or_update_bill(bill_data: CreateUpdateBill):
     """Create or update a bill in the Zedex API.
